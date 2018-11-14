@@ -21,7 +21,7 @@ public class MarkovBot extends ListenerAdapter {
             props = new Properties();
             props.load(fis);
         } catch (IOException ioe) {
-            System.out.println("Attempted to load file input stream from file - ioexception");
+            System.out.println("Failed to load properties from file - ioexception");
             System.out.println(ioe.toString());
             System.exit(1);
         }
@@ -53,7 +53,7 @@ public class MarkovBot extends ListenerAdapter {
         // Markov ingestion logic
         long id = event.getAuthor().getIdLong();
         String messageContent = event.getMessage().getContentStripped();
-
+        System.out.println("ingesting message from id " + id);
         cloud.ingest(id, messageContent);
 
 
