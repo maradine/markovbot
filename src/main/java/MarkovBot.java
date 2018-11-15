@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class MarkovBot extends ListenerAdapter {
 
@@ -49,6 +50,32 @@ public class MarkovBot extends ListenerAdapter {
         }
 
         // any other exits or exclusions
+
+        //command processing
+
+        String command = event.getMessage().getContentStripped();
+        String commandLower = command.toLowerCase();
+
+        Scanner scanner = new Scanner(commandLower);
+        String token = scanner.next();
+
+        if (token.equals("!markov")) {
+
+            if (!scanner.hasNext()) {
+                event.getTextChannel().sendMessage("Hello markov.").queue();
+            } else {
+                switch (scanner.next()) {
+                    case "me":
+                        event.getTextChannel().sendMessage("Gonna markov you when I learn how.").queue();
+                        break;
+                    case "stats":
+                        event.getTextChannel().sendMessage("Markov cloud knows " + cloud.size() + " chains.").queue();
+                        break;
+                }
+            }
+            return;
+        }
+
 
         // Markov ingestion logic
         long id = event.getAuthor().getIdLong();
