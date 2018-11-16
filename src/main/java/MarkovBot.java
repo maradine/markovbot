@@ -68,8 +68,18 @@ public class MarkovBot extends ListenerAdapter {
                     case "me":
                         event.getTextChannel().sendMessage("Gonna markov you when I learn how.").queue();
                         break;
+
                     case "stats":
                         event.getTextChannel().sendMessage("Markov cloud knows " + cloud.size() + " chains.").queue();
+                        long id = event.getAuthor().getIdLong();
+                        if (cloud.containsKey(id) {
+                            long chains = cloud.get(id).size();
+                            event.getTextChannel().sendMessage("Your chain knows " + chains + " roots.").queue();
+                        } else {
+                            event.getTextChannel().sendMessage("You don't have a chain in the cloud.");
+                        }
+
+
                         break;
                 }
             }
